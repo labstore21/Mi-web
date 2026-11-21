@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#eee9df">
+	<meta name="description" content="Diseña tu beanie en LABSTORE. Elige el color, personaliza tu etiqueta y crea un gorro que hable por ti.">
+	<title>LABSTORE — Tu beanie, tus reglas</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: light;
+			--paper: #eee9df;
+			--paper-light: #f7f4ed;
+			--ink: #282821;
+			--muted: #77736a;
+			--green: #245a46;
+			--green-dark: #193e32;
+			--clay: #9a6d4d;
+			--line: #d7d0c3;
+			--mono: "Space Mono", monospace;
+			--sans: "DM Sans", sans-serif;
+			--display: "Barlow Condensed", sans-serif;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--sans);
+			-webkit-font-smoothing: antialiased;
+		}
+		button, input { font: inherit; }
+		button:focus-visible, a:focus-visible, input:focus-visible {
+			outline: 2px solid var(--green);
+			outline-offset: 4px;
+		}
+		a { color: inherit; text-decoration: none; }
+
+		.topbar {
+			height: 74px;
+			padding: 0 6.2%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid rgba(40, 40, 33, .13);
+		}
+		.brand { display: flex; align-items: center; gap: 11px; }
+		.brand img {
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+			object-fit: cover;
+			object-position: center;
+			border: 1px solid rgba(40, 40, 33, .2);
+		}
+		.brand-name { font-size: 15px; font-weight: 800; letter-spacing: 0; }
+		.brand-name span { color: var(--green); }
+		.nav-note, .social-link, .eyebrow, .section-kicker, .viewer-note, .edition {
+			font-family: var(--mono);
+			text-transform: uppercase;
+			letter-spacing: 0;
+		}
+		.nav-note { font-size: 10px; color: var(--muted); }
+		.socials { display: flex; align-items: center; gap: 23px; }
+		.social-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			font-size: 10px;
+			transition: color .2s ease;
+		}
+		.social-link:hover { color: var(--green); }
+		.social-link svg { width: 16px; height: 16px; }
+
+		.hero {
+			min-height: 635px;
+			padding: 57px 8.2% 48px;
+			display: grid;
+			grid-template-columns: minmax(320px, .92fr) minmax(420px, 1.08fr);
+			align-items: center;
+			gap: 5%;
+			overflow: hidden;
+			background:
+				radial-gradient(ellipse at 75% 48%, rgba(181, 164, 135, .23), transparent 43%),
+				linear-gradient(132deg, var(--paper-light) 0%, var(--paper) 57%, #e4dccf 100%);
+		}
+		.intro { max-width: 470px; position: relative; z-index: 1; animation: rise .7s both; }
+		.eyebrow { display: flex; align-items: center; gap: 9px; color: var(--green); font-size: 10px; }
+		.eyebrow::before { content: ""; width: 23px; height: 1px; background: var(--green); }
+		h1 {
+			margin: 25px 0 19px;
+			font-family: var(--display);
+			font-size: 88px;
+			line-height: .88;
+			letter-spacing: 0;
+			font-weight: 700;
+		}
+		h1 span { color: var(--green); }
+		.intro-copy { max-width: 345px; color: #625e55; font-size: 14px; line-height: 1.85; }
+		.intro-actions { margin-top: 30px; display: flex; align-items: center; gap: 18px; }
+		.primary-link {
+			min-height: 48px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 13px;
+			padding: 0 20px;
+			background: var(--green);
+			color: #fff;
+			font-size: 11px;
+			font-weight: 700;
+			transition: background .2s ease, transform .2s ease;
+		}
+		.primary-link:hover { background: var(--green-dark); transform: translateY(-2px); }
+		.primary-link svg { width: 15px; height: 15px; }
+		.edition { margin-top: 51px; color: #948d7e; font-size: 9px; }
+
+		.product-stage { min-width: 0; position: relative; animation: rise .8s .1s both; }
+		.product-stage::before {
+			content: "";
+			position: absolute;
+			width: min(91%, 500px);
+			aspect-ratio: 1;
+			left: 50%; top: 47%;
+			transform: translate(-50%, -50%);
+			border: 1px solid rgba(88, 75, 58, .12);
+			border-radius: 50%;
+			box-shadow: 0 0 0 33px rgba(255,255,255,.13), 0 0 0 34px rgba(88,75,58,.07);
+			pointer-events: none;
+		}
+		.stage-label {
+			position: absolute;
+			top: 3%; left: 2%;
+			color: #8c8478;
+			font-family: var(--mono);
+			font-size: 9px;
+			z-index: 2;
+		}
+		#beanie-view {
+			display: block;
+			width: 100%;
+			height: clamp(340px, 42vw, 500px);
+			position: relative;
+			z-index: 1;
+			touch-action: none;
+			cursor: grab;
+		}
+		#beanie-view:active { cursor: grabbing; }
+		.viewer-note {
+			position: relative;
+			z-index: 2;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			margin-top: -5px;
+			color: #817a6e;
+			font-size: 9px;
+		}
+		.viewer-note svg { width: 14px; height: 14px; }
+
+		.customizer {
+			padding: 27px 8.2% 31px;
+			background: #e4ded2;
+			border-top: 1px solid rgba(40, 40, 33, .12);
+		}
+		.customizer-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+		.section-kicker { color: var(--clay); font-size: 9px; }
+		h2 { margin: 7px 0 0; font-family: var(--display); font-size: 27px; font-weight: 600; line-height: 1.05; }
+		.customizer-hint { color: var(--muted); font-size: 11px; }
+		.customizer-grid { display: grid; grid-template-columns: minmax(210px, .85fr) minmax(260px, 1fr) auto; align-items: center; gap: 42px; }
+		.control-label { display: block; margin-bottom: 12px; font-family: var(--mono); font-size: 9px; color: #777167; text-transform: uppercase; }
+		.swatches { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; max-width: 360px; }
+		.swatch {
+			flex: 0 0 29px;
+			width: 29px;
+			height: 29px;
+			border: 2px solid #e4ded2;
+			border-radius: 50%;
+			box-shadow: 0 0 0 1px transparent;
+			cursor: pointer;
+			transition: box-shadow .16s ease, transform .16s ease;
+		}
+		.swatch:hover { transform: scale(1.09); }
+		.swatch[aria-pressed="true"], .custom-swatch[aria-pressed="true"] { box-shadow: 0 0 0 1px var(--ink); }
+		.custom-swatch {
+			position: relative;
+			flex: 0 0 29px;
+			width: 29px;
+			height: 29px;
+			display: grid;
+			place-items: center;
+			border: 2px solid #e4ded2;
+			border-radius: 50%;
+			background: conic-gradient(#e75b4b, #eab344, #69a85b, #4a9fb0, #835da7, #e75b4b);
+			color: white;
+			font: 700 16px var(--sans);
+			text-shadow: 0 1px 3px rgba(0,0,0,.65);
+			cursor: pointer;
+			transition: box-shadow .16s ease, transform .16s ease;
+		}
+		.custom-swatch:hover { transform: scale(1.09); }
+		.custom-swatch input {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			border: 0;
+			border-radius: 50%;
+			opacity: 0;
+			cursor: pointer;
+		}
+		.custom-swatch:focus-within { outline: 2px solid var(--green); outline-offset: 4px; }
+		.label-input {
+			width: 100%;
+			max-width: 290px;
+			height: 43px;
+			padding: 0 12px;
+			color: var(--ink);
+			background: rgba(247, 244, 237, .7);
+			border: 1px solid #cfc7b9;
+			border-radius: 0;
+			font-size: 12px;
+		}
+		.label-input::placeholder { color: #9a9387; }
+		.order-button {
+			height: 47px;
+			min-width: 192px;
+			padding: 0 17px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			border: 0;
+			background: var(--ink);
+			color: white;
+			cursor: pointer;
+			font-size: 11px;
+			font-weight: 700;
+			transition: background .2s ease;
+		}
+		.order-button:hover { background: var(--green); }
+		.order-button svg { width: 17px; height: 17px; }
+
+		.details {
+			min-height: 105px;
+			padding: 22px 8.2%;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			align-items: center;
+			gap: 24px;
+			background: var(--paper-light);
+		}
+		.detail { display: flex; align-items: center; gap: 12px; }
+		.detail-number { color: var(--clay); font-family: var(--mono); font-size: 10px; }
+		.detail-title { font-size: 11px; font-weight: 700; }
+		.detail-copy { margin-top: 3px; color: var(--muted); font-size: 10px; }
+		footer {
+			min-height: 62px;
+			padding: 16px 6.2%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			background: var(--green-dark);
+			color: #e9e5d9;
+		}
+		.footer-brand { font-size: 11px; font-weight: 800; }
+		.footer-copy { color: #b7c1b6; font-family: var(--mono); font-size: 9px; }
+		.footer-socials { display: flex; gap: 17px; }
+		.footer-socials a { color: #e9e5d9; font-family: var(--mono); font-size: 9px; }
+		.footer-socials a:hover { color: white; }
+
+		@keyframes rise { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: translateY(0); } }
+
+		@media (max-width: 850px) {
+			.hero { grid-template-columns: minmax(260px, .85fr) minmax(310px, 1.15fr); gap: 2%; padding-inline: 6%; }
+			h1 { font-size: 72px; }
+			.customizer, .details { padding-inline: 6%; }
+			.customizer-grid { grid-template-columns: .8fr 1fr; gap: 25px; }
+			.order-button { grid-column: 2; justify-self: start; }
+		}
+		@media (max-width: 620px) {
+			.topbar { height: 64px; padding-inline: 5%; }
+			.nav-note { display: none; }
+			.socials { gap: 15px; }
+			.social-link { font-size: 0; }
+			.social-link svg { width: 18px; height: 18px; }
+			.hero { padding: 39px 7% 31px; grid-template-columns: 1fr; gap: 4px; }
+			.intro { max-width: 100%; }
+			h1 { max-width: 430px; margin: 19px 0 13px; font-size: 62px; }
+			.intro-copy { max-width: 390px; font-size: 13px; }
+			.intro-actions { margin-top: 21px; }
+			.edition { margin-top: 22px; }
+			.product-stage { margin-top: -2px; }
+			#beanie-view { height: min(88vw, 390px); }
+			.product-stage::before { width: 83%; top: 45%; }
+			.stage-label { top: 2%; left: 0; }
+			.customizer { padding: 24px 7%; }
+			.customizer-head { align-items: start; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+			.customizer-grid { grid-template-columns: 1fr; gap: 22px; }
+			.order-button { grid-column: 1; width: 100%; }
+			.details { grid-template-columns: 1fr; gap: 18px; padding: 23px 7%; }
+			footer { padding-inline: 6%; }
+			.footer-copy { display: none; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+		}
+	</style>
+	<script type="importmap">
+		{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
+	</script>
+</head>
+<body>
+	<header class="topbar">
+		<a class="brand" href="#inicio" aria-label="LABSTORE, inicio">
+			<img src="images/icono.jpeg" alt="">
+			<span class="brand-name">LAB<span>STORE</span></span>
+		</a>
+		<span class="nav-note">Hecho para salir, no para quedarse quieto.</span>
+		<nav class="socials" aria-label="Redes sociales">
+			<a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>Instagram
+			</a>
+			<a class="social-link" href="https://wa.me/?text=Hola%20LABSTORE%2C%20quiero%20personalizar%20un%20beanie." target="_blank" rel="noreferrer" aria-label="WhatsApp">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z"/><path d="M9 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.4-.1.6l-.5.6c-.2.2-.2.3-.1.6.4.7 1.1 1.4 1.8 1.8.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.6.8c.3.1.4.3.3.6-.1.4-.4 1-.8 1.2-.4.3-.9.4-1.5.3-1-.2-2.2-.7-3.4-1.8-1-.9-1.7-2-2-2.9-.3-.8-.1-1.6.2-2.4Z"/></svg>WhatsApp
+			</a>
+		</nav>
+	</header>
+
+	<main>
+		<section class="hero" id="inicio">
+			<div class="intro">
+				<div class="eyebrow">LAB essentials · 001</div>
+				<h1>Tu beanie.<br><span>Tus reglas.</span></h1>
+				<p class="intro-copy">Un básico, pero a tu manera. Elige el color, firma la etiqueta y llévalo contigo. Diseñado para el día a día; hecho por ti.</p>
+				<div class="intro-actions">
+					<a class="primary-link" href="#personaliza">Diseñar el mío <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+				</div>
+				<div class="edition">Una pieza. Infinitas formas de llevarla.</div>
+			</div>
+
+			<div class="product-stage" aria-label="Vista 3D del beanie personalizable">
+				<span class="stage-label">VISTA 360° / MODELO 01</span>
+				<canvas id="beanie-view" aria-label="Modelo 3D de un beanie verde; arrastra para girarlo"></canvas>
+				<div class="viewer-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 7l-4 4 4 4M17 7l4 4-4 4M3 11h18"/></svg>Arrastra para girar</div>
+			</div>
+		</section>
+
+		<section class="customizer" id="personaliza" aria-labelledby="customizer-title">
+			<div class="customizer-head">
+				<div><span class="section-kicker">Hecho a tu medida</span><h2 id="customizer-title">Arma tu beanie</h2></div>
+				<span class="customizer-hint">Tu diseño se actualiza al instante.</span>
+			</div>
+			<div class="customizer-grid">
+				<div>
+					<span class="control-label" id="color-label">01 / Elige tu color</span>
+					<div class="swatches" role="group" aria-labelledby="color-label">
+						<button class="swatch" type="button" style="background:#245a46" data-color="#245a46" data-name="Verde bosque" aria-label="Verde bosque" aria-pressed="true"></button>
+						<button class="swatch" type="button" style="background:#b68a62" data-color="#b68a62" data-name="Caramelo" aria-label="Caramelo" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#d7cdbb" data-color="#d7cdbb" data-name="Arena" aria-label="Arena" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#333637" data-color="#333637" data-name="Carbón" aria-label="Carbón" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#a95d4c" data-color="#a95d4c" data-name="Terracota" aria-label="Terracota" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#294b63" data-color="#294b63" data-name="Azul profundo" aria-label="Azul profundo" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#75434d" data-color="#75434d" data-name="Vino" aria-label="Vino" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#c69a43" data-color="#c69a43" data-name="Mostaza" aria-label="Mostaza" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#c88780" data-color="#c88780" data-name="Rosa palo" aria-label="Rosa palo" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#f0eee3" data-color="#f0eee3" data-name="Marfil" aria-label="Marfil" aria-pressed="false"></button>
+						<button class="swatch" type="button" style="background:#4f8d82" data-color="#4f8d82" data-name="Turquesa" aria-label="Turquesa" aria-pressed="false"></button>
+						<label class="custom-swatch" aria-label="Elegir cualquier color" aria-pressed="false" title="Elegir cualquier color">
+							<span aria-hidden="true">+</span>
+							<input id="custom-color" type="color" value="#245a46" aria-label="Elegir cualquier color">
+						</label>
+					</div>
+				</div>
+				<label>
+					<span class="control-label">02 / Firma tu etiqueta</span>
+					<input class="label-input" id="label-text" type="text" maxlength="10" value="LAB" placeholder="Tu palabra (10 letras máx.)" aria-label="Texto para personalizar la etiqueta">
+				</label>
+				<button class="order-button" id="order-button" type="button">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.2 11.7a8.2 8.2 0 0 1-12.1 7.2L3 20l1.2-4.9a8.2 8.2 0 1 1 16-3.4Z"/><path d="M9 8.2c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.3.1.4-.1.6l-.5.6c-.2.2-.2.3-.1.6.4.7 1.1 1.4 1.8 1.8.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.6.8c.3.1.4.3.3.6-.1.4-.4 1-.8 1.2-.4.3-.9.4-1.5.3-1-.2-2.2-.7-3.4-1.8-1-.9-1.7-2-2-2.9-.3-.8-.1-1.6.2-2.4Z"/></svg>
+					Pedir por WhatsApp
+				</button>
+			</div>
+		</section>
+
+		<section class="details" aria-label="Detalles del beanie">
+			<div class="detail"><span class="detail-number">01</span><div><div class="detail-title">Tejido suave</div><div class="detail-copy">Abrigo cómodo para todos los días.</div></div></div>
+			<div class="detail"><span class="detail-number">02</span><div><div class="detail-title">Etiqueta personal</div><div class="detail-copy">Ese detalle pequeño, muy tuyo.</div></div></div>
+			<div class="detail"><span class="detail-number">03</span><div><div class="detail-title">Tu estilo, en 360°</div><div class="detail-copy">Gíralo y encuentra tu lado.</div></div></div>
+		</section>
+	</main>
+
+	<footer>
+		<a class="footer-brand" href="#inicio">LABSTORE</a>
+		<span class="footer-copy">URBAN CLOTHING · HECHO PARA TI</span>
+		<nav class="footer-socials" aria-label="Redes sociales">
+			<a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+			<a href="https://wa.me/?text=Hola%20LABSTORE%2C%20quiero%20personalizar%20un%20beanie." target="_blank" rel="noreferrer">WhatsApp</a>
+		</nav>
+	</footer>
+
+	<script type="module">
+		import * as THREE from 'three';
+
+		const canvas = document.querySelector('#beanie-view');
+		const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+		renderer.outputColorSpace = THREE.SRGBColorSpace;
+		renderer.toneMapping = THREE.ACESFilmicToneMapping;
+		renderer.toneMappingExposure = 1.25;
+
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(33, 1, 0.1, 100);
+		camera.position.set(0, 0.1, 5.8);
+		scene.add(new THREE.HemisphereLight(0xfff5e5, 0x645044, 2.6));
+		const keyLight = new THREE.DirectionalLight(0xffefda, 3.2);
+		keyLight.position.set(-3, 5, 5);
+		keyLight.intensity = 4.2;
+		scene.add(keyLight);
+		const fillLight = new THREE.DirectionalLight(0xd0dfd1, 1.4);
+		fillLight.position.set(4, 1, -3);
+		scene.add(fillLight);
+
+		const knitCanvas = document.createElement('canvas');
+		knitCanvas.width = 512;
+		knitCanvas.height = 512;
+		const knitContext = knitCanvas.getContext('2d');
+		knitContext.fillStyle = '#e6e2d9';
+		knitContext.fillRect(0, 0, 512, 512);
+		for (let rib = 0; rib < 64; rib += 1) {
+			const x = rib * 8;
+			knitContext.fillStyle = 'rgba(255,255,255,.38)';
+			knitContext.fillRect(x, 0, 2, 512);
+			knitContext.fillStyle = 'rgba(70,60,48,.09)';
+			knitContext.fillRect(x + 5, 0, 2, 512);
+		}
+		const knitTexture = new THREE.CanvasTexture(knitCanvas);
+		knitTexture.colorSpace = THREE.SRGBColorSpace;
+		knitTexture.wrapS = THREE.RepeatWrapping;
+		knitTexture.wrapT = THREE.RepeatWrapping;
+		knitTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+		const beanie = new THREE.Group();
+		scene.add(beanie);
+		const fabric = new THREE.MeshStandardMaterial({ map: knitTexture, color: '#245a46', roughness: 0.92 });
+		const cuffFabric = new THREE.MeshStandardMaterial({ map: knitTexture, color: '#245a46', roughness: 0.96 });
+		const shellProfile = [
+			new THREE.Vector2(0, 1.55), new THREE.Vector2(.13, 1.52), new THREE.Vector2(.31, 1.43),
+			new THREE.Vector2(.52, 1.28), new THREE.Vector2(.7, 1.08), new THREE.Vector2(.82, .83),
+			new THREE.Vector2(.88, .57), new THREE.Vector2(.89, .34), new THREE.Vector2(.87, .22)
+		];
+		const crown = new THREE.Mesh(new THREE.LatheGeometry(shellProfile, 96), fabric);
+		crown.position.y = -.05;
+		beanie.add(crown);
+
+		const cuffProfile = [
+			new THREE.Vector2(.85, .45), new THREE.Vector2(.9, .45), new THREE.Vector2(.91, .42),
+			new THREE.Vector2(.91, .08), new THREE.Vector2(.89, .045), new THREE.Vector2(.85, .045)
+		];
+		const cuff = new THREE.Mesh(new THREE.LatheGeometry(cuffProfile, 96), cuffFabric);
+		cuff.position.y = -.05;
+		beanie.add(cuff);
+
+		const innerCuff = new THREE.Mesh(
+			new THREE.CircleGeometry(.875, 64),
+			new THREE.MeshStandardMaterial({ map: knitTexture, color: '#1d4738', roughness: .98 })
+		);
+		innerCuff.rotation.x = -Math.PI / 2;
+		innerCuff.position.y = .005;
+		beanie.add(innerCuff);
+
+		const patchCanvas = document.createElement('canvas');
+		patchCanvas.width = 256;
+		patchCanvas.height = 192;
+		const patchContext = patchCanvas.getContext('2d');
+		const patchTexture = new THREE.CanvasTexture(patchCanvas);
+		patchTexture.colorSpace = THREE.SRGBColorSpace;
+		const patch = new THREE.Mesh(
+			new THREE.BoxGeometry(.31, .22, .025),
+			new THREE.MeshStandardMaterial({ map: patchTexture, roughness: .88 })
+		);
+		patch.position.set(0, .20, .895);
+		beanie.add(patch);
+
+		const floorShadow = new THREE.Mesh(
+			new THREE.CircleGeometry(1.15, 64),
+			new THREE.MeshBasicMaterial({ color: 0x514638, transparent: true, opacity: .13 })
+		);
+		floorShadow.rotation.x = -Math.PI / 2;
+		floorShadow.scale.set(1.15, .29, 1);
+		floorShadow.position.set(0, -1.32, 0);
+		scene.add(floorShadow);
+
+		function updatePatch(text) {
+			patchContext.clearRect(0, 0, 256, 192);
+			patchContext.fillStyle = '#c9ad84';
+			patchContext.fillRect(0, 0, 256, 192);
+			patchContext.strokeStyle = 'rgba(84,62,43,.35)';
+			patchContext.lineWidth = 5;
+			patchContext.strokeRect(5, 5, 246, 182);
+			patchContext.fillStyle = '#354238';
+			patchContext.font = '600 62px Georgia, serif';
+			patchContext.textAlign = 'center';
+			patchContext.textBaseline = 'middle';
+			patchContext.fillText((text || 'LAB').toUpperCase(), 128, 99, 220);
+			patchTexture.needsUpdate = true;
+		}
+		updatePatch('LAB');
+
+		function resizeRenderer() {
+			const bounds = canvas.getBoundingClientRect();
+			if (!bounds.width || !bounds.height) return;
+			renderer.setSize(bounds.width, bounds.height, false);
+			camera.aspect = bounds.width / bounds.height;
+			camera.updateProjectionMatrix();
+		}
+		const resizeObserver = new ResizeObserver(resizeRenderer);
+		resizeObserver.observe(canvas);
+		resizeRenderer();
+
+		let dragging = false;
+		let lastX = 0;
+		let lastY = 0;
+		canvas.addEventListener('pointerdown', (event) => {
+			dragging = true;
+			lastX = event.clientX;
+			lastY = event.clientY;
+			canvas.setPointerCapture(event.pointerId);
+		});
+		canvas.addEventListener('pointermove', (event) => {
+			if (!dragging) return;
+			beanie.rotation.y += (event.clientX - lastX) * .012;
+			beanie.rotation.x = THREE.MathUtils.clamp(beanie.rotation.x + (event.clientY - lastY) * .006, -.35, .35);
+			lastX = event.clientX;
+			lastY = event.clientY;
+		});
+		canvas.addEventListener('pointerup', () => { dragging = false; });
+		canvas.addEventListener('pointercancel', () => { dragging = false; });
+
+		let selectedColorName = 'Verde bosque';
+		const customColorSwatch = document.querySelector('.custom-swatch');
+		function setBeanieColor(color, name) {
+			fabric.color.set(color);
+			cuffFabric.color.set(color);
+			selectedColorName = name === 'Personalizado' ? `Personalizado (${color.toUpperCase()})` : name;
+			document.querySelectorAll('.swatch').forEach((button) => {
+				button.setAttribute('aria-pressed', String(button.dataset.name === name));
+			});
+			customColorSwatch.setAttribute('aria-pressed', String(name === 'Personalizado'));
+		}
+		document.querySelectorAll('.swatch').forEach((swatch) => {
+			swatch.addEventListener('click', () => setBeanieColor(swatch.dataset.color, swatch.dataset.name));
+		});
+		document.querySelector('#custom-color').addEventListener('input', (event) => {
+			setBeanieColor(event.target.value, 'Personalizado');
+		});
+		document.querySelector('#label-text').addEventListener('input', (event) => updatePatch(event.target.value));
+		document.querySelector('#order-button').addEventListener('click', () => {
+			const customLabel = document.querySelector('#label-text').value.trim() || 'LAB';
+			const message = `Hola LABSTORE, quiero pedir un beanie color ${selectedColorName} con la etiqueta "${customLabel}".`;
+			window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+		});
+
+		function animate() {
+			requestAnimationFrame(animate);
+			if (!dragging) beanie.rotation.y += .0025;
+			renderer.render(scene, camera);
+		}
+		animate();
+	</script>
+</body>
+</html>
