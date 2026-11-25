@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1">
+  <meta name="description" content="LAB — Live As Believer. Ropa urbana para vivir, crear y volver a empezar.">
+  <title>LAB Store — Live As Believer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement">Costa Rica · Live As Believer · Viste lo que crees</div>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="LAB Store, inicio">LAB<span>LIVE AS BELIEVER</span></a>
+      <div class="nav-links" id="nav-links">
+        <a href="#productos">Productos</a>
+        <a href="#historia">Nuestra historia</a>
+        <a href="#estilo">Estilo LAB</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <button class="cart-trigger" id="open-cart" type="button" aria-label="Abrir bolsa de compras">
+        <span>Tu bolsa</span><span class="cart-count" id="cart-count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">LAB · Costa Rica</p>
+        <h1 id="hero-title">Vive como <em>un creyente.</em></h1>
+        <p class="hero-description">Más que ropa, una actitud. Cree en tus sueños, trabaja por ellos y nunca dejes de avanzar.</p>
+        <a class="button" href="#productos">Descubre LAB <span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-image">
+        <img src="images/inicio.jpg" alt="La comunidad LAB viste camisetas y gorras en la ciudad" fetchpriority="high">
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Filosofía LAB">
+      <div class="ticker-track" aria-hidden="true">
+        <span>Live as believer</span><span class="star">✳</span><span>Viste lo que crees</span><span class="star">✳</span><span>Tu camino, tus reglas</span><span class="star">✳</span><span>Live as believer</span><span class="star">✳</span><span>Viste lo que crees</span><span class="star">✳</span><span>Tu camino, tus reglas</span><span class="star">✳</span>
+      </div>
+    </div>
+
+    <section class="section wrap" id="productos" aria-labelledby="products-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">La selección LAB</p>
+          <h2 id="products-title">Piezas para <em>creer.</em></h2>
+        </div>
+        <a class="section-link" href="#productos">Camisetas &amp; gorras <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="products-grid" id="products-grid"></div>
+    </section>
+
+    <section class="editorial" id="estilo" aria-labelledby="style-title">
+      <div class="editorial-image">
+        <img src="images/lifestyle1.png" alt="La colección LAB: camisetas, gorra y prendas urbanas" loading="lazy">
+      </div>
+      <div class="editorial-copy">
+        <p class="eyebrow">Estilo LAB · 001</p>
+        <h2 id="style-title">Más que ropa, <em>una actitud.</em></h2>
+        <p>Una gorra, una camiseta, una historia. Lleva contigo la convicción de construir algo diferente, a tu manera.</p>
+        <a class="button" href="#productos">Encuentra tu pieza <span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section wrap" id="historia" aria-labelledby="story-title">
+      <div class="story">
+        <div class="story-copy">
+          <p class="eyebrow">La historia detrás de la marca</p>
+          <h2 id="story-title">No dejes de <em>creer.</em></h2>
+          <p>LAB nace de la historia de un joven que comenzó a cuestionar el ciclo de trabajar, ganar dinero, gastar y volver a empezar. Sabía que había algo más: la capacidad de creer que podía construir algo diferente.</p>
+          <p>LAB significa <strong>Live As Believer</strong>: vive como un creyente. Mientras estés vivo, todavía puedes crear, cambiar, aprender y volver a comenzar.</p>
+          <div class="story-quote">“Una marca que representa la iniciativa, la identidad y la convicción de que todavía podemos construir nuestros propios caminos.”</div>
+        </div>
+        <div class="story-poster">
+          <img src="images/filosofia.png" alt="La filosofía LAB: Live As Believer, una historia sobre creer y construir un camino propio" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap community" aria-label="Comunidad LAB">
+      <div>
+        <h2>Nos vemos por ahí.</h2>
+        <p>Sigue el camino y comparte el tuyo con la comunidad LAB.</p>
+      </div>
+      <a class="instagram-link" href="https://www.instagram.com/labstore21/" target="_blank" rel="noreferrer">
+        <span class="instagram-mark" aria-hidden="true">◎</span> @labstore21 <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-main">
+        <a class="footer-brand" href="#inicio">LAB<span>LIVE AS BELIEVER</span></a>
+        <nav class="footer-nav" aria-label="Enlaces del pie de página">
+          <a href="#productos">Productos</a>
+          <a href="#historia">Nuestra historia</a>
+          <a href="https://wa.me/50663879662" target="_blank" rel="noreferrer">Contáctanos por WhatsApp</a>
+          <a href="https://www.instagram.com/labstore21/" target="_blank" rel="noreferrer">Instagram</a>
+        </nav>
+      </div>
+      <div class="footer-caption"><span>© <span id="current-year"></span> LAB Store · Costa Rica</span><span>Hecho para quienes no dejan de creer.</span></div>
+    </div>
+  </footer>
+
+  <div class="cart-backdrop" id="cart-backdrop"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Bolsa de compras" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Tu bolsa <span id="cart-heading-count">(0)</span></h2>
+      <button class="close-cart" id="close-cart" type="button" aria-label="Cerrar bolsa">×</button>
+    </div>
+    <div class="cart-items" id="cart-items" aria-live="polite"></div>
+    <div class="cart-footer">
+      <p class="cart-note">El precio y la disponibilidad se confirman al coordinar tu pedido por WhatsApp.</p>
+      <button class="button checkout-button" id="checkout-button" type="button" disabled>Continuar por WhatsApp <span class="arrow" aria-hidden="true">↗</span></button>
+      <p class="cart-status" id="cart-status" role="status"></p>
+    </div>
+  </aside>
+
+  <script>
+    const products = [
+      {
+        id: "camiseta",
+        name: "Camiseta LAB",
+        subtitle: "Algodón · Corte clásico",
+        type: "Camiseta",
+        variants: [
+          { color: "Blanco", image: "products/camisa blanca.jpg", swatch: "white" },
+          { color: "Negro", image: "products/camisa negra algodon.jpg", swatch: "black" }
+        ],
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: "gorra",
+        name: "Gorra deportiva LAB",
+        subtitle: "Ajustable · Logo bordado",
+        type: "Gorra",
+        variants: [
+          { color: "Blanco", image: "products/gorra blanca deportiva.jpg", swatch: "white" },
+          { color: "Negro", image: "products/gorra negra deportiva.jpg", swatch: "black" }
+        ],
+        sizes: []
+      }
+    ];
+    const whatsappNumber = "50663879662";
+    const storageKey = "labstore-cart-v1";
+    const imageByVariant = new Map();
+    const productsGrid = document.getElementById("products-grid");
+    const cartPanel = document.getElementById("cart-panel");
+    const cartBackdrop = document.getElementById("cart-backdrop");
+    const cartItems = document.getElementById("cart-items");
+    const cartCount = document.getElementById("cart-count");
+    const cartHeadingCount = document.getElementById("cart-heading-count");
+    const checkoutButton = document.getElementById("checkout-button");
+    const cartStatus = document.getElementById("cart-status");
+    let cart = readCart();
+    let lastFocusedElement = null;
+
+    function readCart() {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return [];
+      try {
+        const parsed = JSON.parse(saved);
+        if (!Array.isArray(parsed)) return [];
+        return parsed.filter((item) =>
+          item && typeof item.id === "string" &&
+          typeof item.color === "string" &&
+          typeof item.size === "string" &&
+          Number.isInteger(item.quantity) && item.quantity > 0 &&
+          products.some((product) =>
+            product.id === item.id &&
+            product.variants.some((variant) => variant.color === item.color) &&
+            (product.sizes.length === 0 || product.sizes.includes(item.size))
+          )
+        );
+      } catch (error) {
+        console.warn("No se pudo leer la bolsa guardada.", error);
+        return [];
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(cart));
+      } catch (error) {
+        console.error("No se pudo guardar la bolsa en este navegador.", error);
+        cartStatus.textContent = "No se pudo guardar la bolsa en este navegador.";
+      }
+    }
+
+    function getVariant(product, color) {
+      return product.variants.find((variant) => variant.color === color) || product.variants[0];
+    }
+
+    function renderProducts() {
+      productsGrid.innerHTML = products.map((product) => {
+        const initialVariant = product.variants[0];
+        const options = product.sizes.length
+          ? `<label class="product-options"><span class="visually-hidden">Talla</span><select class="size-select" data-size="${product.id}" aria-label="Talla de ${product.name}">${product.sizes.map((size) => `<option value="${size}">${size}</option>`).join("")}</select></label>`
+          : "";
+        return `
+          <article class="product-card" data-product="${product.id}">
+            <div class="product-visual">
+              <img src="${initialVariant.image}" alt="${product.name}, color ${initialVariant.color.toLowerCase()}" loading="lazy" data-product-image="${product.id}">
+              <span class="product-tag">${product.type} · LAB essentials</span>
+            </div>
+            <div class="product-info">
+              <div class="product-title-row">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-price">Precio por consultar</p>
+              </div>
+              <p class="product-subtitle">${product.subtitle}</p>
+              <div class="product-controls">
+                <div class="swatches" role="group" aria-label="Color de ${product.name}">
+                  ${product.variants.map((variant, index) => `<button class="swatch swatch-${variant.swatch}" type="button" data-color="${variant.color}" data-product="${product.id}" aria-label="Color ${variant.color}" aria-pressed="${index === 0}"></button>`).join("")}
+                </div>
+                <div class="product-options">
+                  ${options}
+                  <button class="add-button" type="button" data-add="${product.id}">Agregar <span aria-hidden="true">+</span></button>
+                </div>
+              </div>
+            </div>
+          </article>`;
+      }).join("");
+    }
+
+    function cartQuantity() {
+      return cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function renderCart() {
+      const totalItems = cartQuantity();
+      cartCount.textContent = totalItems;
+      cartHeadingCount.textContent = `(${totalItems})`;
+      checkoutButton.disabled = cart.length === 0;
+      cartStatus.textContent = "";
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<div class="cart-empty"><div><strong>Tu bolsa está vacía.</strong>Encuentra una pieza que te represente.</div></div>';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map((item, index) => {
+        const product = products.find((entry) => entry.id === item.id);
+        const variant = getVariant(product, item.color);
+        const sizeLabel = item.size ? ` · Talla ${item.size}` : "";
+        return `
+          <article class="cart-item">
+            <img src="${variant.image}" alt="${product.name}, color ${variant.color.toLowerCase()}">
+            <div>
+              <h3>${product.name}</h3>
+              <p>${variant.color}${sizeLabel}</p>
+              <div class="quantity-control" aria-label="Cantidad de ${product.name}">
+                <button type="button" data-quantity="${index}" data-change="-1" aria-label="Quitar una unidad">−</button>
+                <span>${item.quantity}</span>
+                <button type="button" data-quantity="${index}" data-change="1" aria-label="Agregar una unidad">+</button>
+              </div>
+            </div>
+            <button class="remove-item" type="button" data-remove="${index}" aria-label="Eliminar ${product.name}">×</button>
+          </article>`;
+      }).join("");
+    }
+
+    function setCartOpen(open) {
+      if (open) lastFocusedElement = document.activeElement;
+      cartPanel.classList.toggle("is-open", open);
+      cartBackdrop.classList.toggle("is-open", open);
+      cartPanel.setAttribute("aria-hidden", String(!open));
+      document.body.classList.toggle("cart-open", open);
+      if (open) document.getElementById("close-cart").focus();
+      else if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    function addToCart(product, color, size) {
+      const existing = cart.find((item) => item.id === product.id && item.color === color && item.size === size);
+      if (existing) existing.quantity += 1;
+      else cart.push({ id: product.id, color, size, quantity: 1 });
+      saveCart();
+      renderCart();
+      const button = document.querySelector(`[data-add="${product.id}"]`);
+      button.classList.add("added");
+      button.innerHTML = 'Agregado <span aria-hidden="true">✓</span>';
+      window.setTimeout(() => {
+        button.classList.remove("added");
+        button.innerHTML = 'Agregar <span aria-hidden="true">+</span>';
+      }, 1100);
+    }
+
+    productsGrid.addEventListener("click", (event) => {
+      const colorButton = event.target.closest("[data-color]");
+      if (colorButton) {
+        const product = products.find((entry) => entry.id === colorButton.dataset.product);
+        const variant = getVariant(product, colorButton.dataset.color);
+        const card = colorButton.closest(".product-card");
+        const image = card.querySelector(`[data-product-image="${product.id}"]`);
+        image.src = variant.image;
+        image.alt = `${product.name}, color ${variant.color.toLowerCase()}`;
+        card.querySelectorAll("[data-color]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button === colorButton));
+        });
+        return;
+      }
+
+      const addButton = event.target.closest("[data-add]");
+      if (!addButton) return;
+      const product = products.find((entry) => entry.id === addButton.dataset.add);
+      const card = addButton.closest(".product-card");
+      const selectedColor = card.querySelector('[data-color][aria-pressed="true"]');
+      const sizeSelect = card.querySelector(".size-select");
+      addToCart(product, selectedColor.dataset.color, sizeSelect ? sizeSelect.value : "");
+    });
+
+    cartItems.addEventListener("click", (event) => {
+      const quantityButton = event.target.closest("[data-quantity]");
+      if (quantityButton) {
+        const index = Number(quantityButton.dataset.quantity);
+        cart[index].quantity += Number(quantityButton.dataset.change);
+        if (cart[index].quantity <= 0) cart.splice(index, 1);
+        saveCart();
+        renderCart();
+        return;
+      }
+      const removeButton = event.target.closest("[data-remove]");
+      if (removeButton) {
+        cart.splice(Number(removeButton.dataset.remove), 1);
+        saveCart();
+        renderCart();
+      }
+    });
+
+    document.getElementById("open-cart").addEventListener("click", () => setCartOpen(true));
+    document.getElementById("close-cart").addEventListener("click", () => setCartOpen(false));
+    cartBackdrop.addEventListener("click", () => setCartOpen(false));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && cartPanel.classList.contains("is-open")) setCartOpen(false);
+    });
+
+    checkoutButton.addEventListener("click", () => {
+      if (cart.length === 0) return;
+      const lines = cart.map((item) => {
+        const product = products.find((entry) => entry.id === item.id);
+        const size = item.size ? `, talla ${item.size}` : "";
+        return `- ${product.name} (${item.color}${size}) x${item.quantity}`;
+      });
+      const message = `Hola, quiero comprar estos productos de LAB:%0A${encodeURIComponent(lines.join("\n"))}%0A%0A¿Me pueden confirmar el precio y disponibilidad?`;
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank", "noopener,noreferrer");
+    });
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => {
+      const open = menuToggle.getAttribute("aria-expanded") !== "true";
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      navLinks.classList.toggle("is-open", open);
+    });
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+      }
+    });
+
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
